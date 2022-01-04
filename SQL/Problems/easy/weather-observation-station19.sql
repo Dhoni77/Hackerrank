@@ -1,0 +1,20 @@
+--1
+SELECT FORMAT(SQRT(POWER(MIN(LAT_N)-MAX(LAT_N), 2) + POWER(MIN(LONG_W)-MAX(LONG_W), 2)), 'F4') FROM STATION;
+
+--2
+SELECT FORMAT(SQRT(POWER(MIN(LAT_N)-MAX(LAT_N), 2) + POWER(MIN(LONG_W)-MAX(LONG_W), 2)), 'F4') FROM STATION;
+
+--3
+DECLARE @a FLOAT;
+DECLARE @b FLOAT;
+DECLARE @c FLOAT;
+DECLARE @d FLOAT;
+DECLARE @distance FLOAT;
+
+SET @a = (SELECT MIN(lat_n) FROM station);
+SET @b = (SELECT MAX(lat_n) FROM station);
+SET @c = (SELECT MIN(long_w) FROM station);
+SET @d = (SELECT MAX(long_w) FROM station);
+SET @distance = SQRT(SQUARE(@a - @b) + SQUARE(@c - @d));
+
+SELECT FORMAT(@distance, 'F4');
